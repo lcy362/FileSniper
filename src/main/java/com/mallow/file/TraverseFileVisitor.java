@@ -1,5 +1,7 @@
 package com.mallow.file;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -18,7 +20,11 @@ public class TraverseFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        System.out.println(file);
+        if (attrs.size() > 5000000) {
+            FileInputStream fis = new FileInputStream(file.toFile());
+            String md5 = DigestUtils.md5Hex(fis);
+            System.out.println(file + ": " +md5);
+        }
         return FileVisitResult.CONTINUE;
     }
 
