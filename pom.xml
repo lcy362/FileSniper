@@ -8,5 +8,13 @@
     <artifactId>FileSniper</artifactId>
     <version>0.1.0</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
