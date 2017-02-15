@@ -1,7 +1,9 @@
 package com.mallow.file;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -30,5 +32,15 @@ public class FileOperationTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void md5test() throws IOException {
+        FileInputStream fis = new FileInputStream("D://esper.txt");
+        String md5 = DigestUtils.md5Hex(fis);
+        System.out.println(md5);
+        FileInputStream fis1 = new FileInputStream("D://esper - 副本.txt");
+        String md51 = DigestUtils.md5Hex(fis1);
+        System.out.println(md51);
     }
 }
