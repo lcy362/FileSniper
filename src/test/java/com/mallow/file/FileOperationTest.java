@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
 import java.util.stream.Stream;
 
 /**
@@ -27,8 +27,9 @@ public class FileOperationTest {
     @Test
     public void fileVisitorTest() {
         Path p = Paths.get("D://");
+        HashMap<String, String> map = new HashMap<>();
         try {
-            Files.walkFileTree(p, new TraverseFileVisitor());
+            Files.walkFileTree(p, new SniperFileVisitor(map));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,8 +13,11 @@ import java.util.HashMap;
 /**
  * Created by lcy on 2017/2/15.
  */
-public class TraverseFileVisitor implements FileVisitor<Path> {
-
+public class SniperFileVisitor implements FileVisitor<Path> {
+    private HashMap<String, String> fingerPrints;
+    public SniperFileVisitor(HashMap<String, String> map) {
+        fingerPrints = map;
+    }
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         return FileVisitResult.CONTINUE;
@@ -25,7 +28,12 @@ public class TraverseFileVisitor implements FileVisitor<Path> {
         if (attrs.size() > 5000000) {
             FileInputStream fis = new FileInputStream(file.toFile());
             String md5 = DigestUtils.md5Hex(fis);
-            System.out.println(file.toString() + ": " +md5);
+            if (fingerPrints.containsKey(md5)) {
+                fingerPrints.put(md5, fingerPrints.get(md5) + "_" + file.toString());
+                System.out.println("duplicate files: " + fingerPrints.get(md5));
+            } else {
+                fingerPrints.put(md5, file.toString());
+            }
         }
         return FileVisitResult.CONTINUE;
     }
