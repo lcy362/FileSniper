@@ -10,7 +10,11 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * Created by lcy on 2017/2/15.
+ * just write a multi-thread version for show
+ * in fact, as the bottleneck is IO, rather than CPU, can't see will multi-thread be effective
  */
+
+//TODO has not tested
 public class MultiThreadFileVisitor implements FileVisitor<Path> {
     private Map<String, String> fingerPrints;
     private ExecutorService pool;
