@@ -1,6 +1,8 @@
 package com.mallow.file.multithread;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +18,8 @@ public class FileHandler implements Runnable {
     private Path file;
     private BasicFileAttributes attrs;
     private Map fingerPrints;
+    private Logger logger = LoggerFactory.getLogger(FileHandler.class);
+
     public FileHandler(Path dir, BasicFileAttributes attrs, Map fingers) {
         this.file = dir;
         this.attrs = attrs;
@@ -39,7 +43,7 @@ public class FileHandler implements Runnable {
             }
             if (fingerPrints.containsKey(md5)) {
                 fingerPrints.put(md5, fingerPrints.get(md5) + "_" + file.toString());
-                System.out.println(System.currentTimeMillis() + " duplicate files: " + fingerPrints.get(md5));
+                logger.info(System.currentTimeMillis() + " duplicate files: " + fingerPrints.get(md5));
             } else {
                 fingerPrints.put(md5, file.toString());
             }
