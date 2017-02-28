@@ -29,11 +29,11 @@ public class SniperFileVisitor implements FileVisitor<Path> {
             String md5 = DigestUtils.md5Hex(fis);
             if (fingerPrints.containsKey(md5)) {
                 fingerPrints.put(md5, fingerPrints.get(md5) + "_" + file.toString());
-                System.out.println("duplicate files: " + fingerPrints.get(md5));
+                System.out.println(System.currentTimeMillis() + " duplicate files: " + fingerPrints.get(md5));
             } else {
                 fingerPrints.put(md5, file.toString());
             }
-            System.out.println(fingerPrints.size());
+//            System.out.println(fingerPrints.size());
         }
         return FileVisitResult.CONTINUE;
     }

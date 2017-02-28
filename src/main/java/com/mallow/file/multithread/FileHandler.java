@@ -39,12 +39,12 @@ public class FileHandler implements Runnable {
             }
             if (fingerPrints.containsKey(md5)) {
                 fingerPrints.put(md5, fingerPrints.get(md5) + "_" + file.toString());
-                System.out.println("duplicate files: " + fingerPrints.get(md5));
+                System.out.println(System.currentTimeMillis() + " duplicate files: " + fingerPrints.get(md5));
             } else {
                 fingerPrints.put(md5, file.toString());
             }
-            System.out.println(fingerPrints.size());
-            System.out.println("finish: " + file.toString());
+//            System.out.println(fingerPrints.size());
+//            System.out.println("finish: " + file.toString());
         }
     }
 }
