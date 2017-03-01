@@ -1,4 +1,5 @@
-# window重复文件查找工具
+# window重复文件查找工具 space sniffer
+java版本spacesniffer
 ## Version 0.1.1 (2017.2.28)
 提供一个多线程遍历的入口MultiThreadFileTraverser。在ssd下测试效果不错。
 
