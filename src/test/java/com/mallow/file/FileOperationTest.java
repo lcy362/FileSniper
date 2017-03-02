@@ -44,4 +44,14 @@ public class FileOperationTest {
         String md51 = DigestUtils.md5Hex(fis1);
         System.out.println(md51);
     }
+
+    @Test
+    public void showSeq() {
+        Path p = Paths.get("D://doc");
+        try {
+            Files.walkFileTree(p, new VisitorTest());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
