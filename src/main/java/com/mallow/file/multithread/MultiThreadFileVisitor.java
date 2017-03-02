@@ -1,5 +1,8 @@
 package com.mallow.file.multithread;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -14,10 +17,10 @@ import java.util.concurrent.ExecutorService;
  * in fact, as the bottleneck is IO, rather than CPU, can't see will multi-thread be effective
  */
 
-//TODO has not tested
 public class MultiThreadFileVisitor implements FileVisitor<Path> {
     private Map<String, String> fingerPrints;
     private ExecutorService pool;
+    Logger logger = LoggerFactory.getLogger(MultiThreadFileVisitor.class);
     public MultiThreadFileVisitor(Map<String, String> map, ExecutorService pool) {
         fingerPrints = map;
         this.pool = pool;
@@ -35,7 +38,7 @@ public class MultiThreadFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-        System.out.println("failed: " + file);
+        logger.error("failed: " + file);
         exc.printStackTrace();
         return FileVisitResult.CONTINUE;
     }
