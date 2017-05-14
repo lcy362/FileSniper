@@ -11,10 +11,11 @@ import java.util.HashMap;
  */
 public class FileTraverser {
     public static void main(String args[]) {
-        Path p = Paths.get("D://");
+        Path p = Paths.get("D://doc");
         HashMap<String, String> map = new HashMap<>();
         try {
             Files.walkFileTree(p, new SniperFileVisitor(map));
+            System.out.println("finish, size: " + map.size());
         } catch (IOException e) {
             e.printStackTrace();
         }

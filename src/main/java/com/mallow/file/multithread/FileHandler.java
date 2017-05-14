@@ -37,6 +37,7 @@ public class FileHandler implements Runnable {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            // use md5 as file's finerPrint
             String md5 = null;
             try {
                 md5 = DigestUtils.md5Hex(fis);

@@ -17,8 +17,8 @@ import java.util.concurrent.Executors;
 public class MultiThreadFileTraverser {
     public static void main(String args[]) {
         Logger logger = LoggerFactory.getLogger(MultiThreadFileTraverser.class);
-        int filterSize = 15;
-        String path = "D://";
+        int filterSize = 15; //ignore files smaller than filterSize (mb) , default 15
+        String path = "D://"; //the path to run
         if (args.length > 0) {
             path = args[0];
         }
@@ -29,8 +29,9 @@ public class MultiThreadFileTraverser {
         ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
         ExecutorService pool = Executors.newFixedThreadPool(10);
         try {
+            // use walkFileTree to traverse the file system
             Files.walkFileTree(p, new MultiThreadFileVisitor(map, pool, filterSize));
-            logger.info("finish, size: " + map.size());
+//            logger.info("finish, size: " + map.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
