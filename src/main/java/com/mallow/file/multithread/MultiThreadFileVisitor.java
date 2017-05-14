@@ -29,6 +29,7 @@ public class MultiThreadFileVisitor implements FileVisitor<Path> {
     }
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+        logger.debug("start: " + dir.toString());
         return FileVisitResult.CONTINUE;
     }
 
@@ -47,6 +48,7 @@ public class MultiThreadFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        logger.debug("finish: " + dir.toString());
         return FileVisitResult.CONTINUE;
     }
 }

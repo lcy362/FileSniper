@@ -1,5 +1,8 @@
 package com.mallow.file.multithread;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +16,7 @@ import java.util.concurrent.Executors;
  */
 public class MultiThreadFileTraverser {
     public static void main(String args[]) {
+        Logger logger = LoggerFactory.getLogger(MultiThreadFileTraverser.class);
         int filterSize = 15;
         String path = "D://";
         if (args.length > 0) {
@@ -26,6 +30,7 @@ public class MultiThreadFileTraverser {
         ExecutorService pool = Executors.newFixedThreadPool(10);
         try {
             Files.walkFileTree(p, new MultiThreadFileVisitor(map, pool, filterSize));
+            logger.info("finish, size: " + map.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
