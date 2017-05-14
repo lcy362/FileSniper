@@ -1,16 +1,31 @@
-# window重复文件查找工具 space sniffer
+# window重复文件查找工具 java版本space sniffer
 # a duplication files detection tool of windows
-java版本spacesniffer
-## Version 0.1.1 (2017.2.28)
-提供一个多线程遍历的入口MultiThreadFileTraverser。在ssd下测试效果不错。
+spacesniffer in java
 
-## Version 0.1.0 初始版本
-只实现基本功能。
+## usage
+download the source code, and run "mvn clean package -DskipTests"
 
-使用一个hashmap保存文件系统中所有文件的md5值。
+then "java -jar FileSniper.jar path size"
 
-### 后续计划
-1. 支持程序中断后继续执行
-2. 优化运行效率
-3. 完善代码、注释、文档等
-4. ....随时想到随时增加
+path: run program in this path 
+
+size: ignore files smaller than the size(mb)
+
+## changelist
+### Version 1.0.0 (2017.5.14)
+first official version.
+
+add some user-friendly funtions: you can use fileSniper with few commands.
+
+### Version 0.1.1 (2017.2.28)
+add a multithread main MultiThreadFileTraverser。tested well in ssd.
+
+### Version 0.1.0 initial version
+basic functions
+
+use md5 as a file's fingerprint, and use a hashmap to store all fingers.
+
+### plans
+1. add support for breakpoint resume
+2. optimize processing speed
+
