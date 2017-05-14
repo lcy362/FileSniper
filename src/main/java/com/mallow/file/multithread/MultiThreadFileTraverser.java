@@ -13,11 +13,19 @@ import java.util.concurrent.Executors;
  */
 public class MultiThreadFileTraverser {
     public static void main(String args[]) {
-        Path p = Paths.get("D://");
+        int filterSize = 15;
+        String path = "D://";
+        if (args.length > 0) {
+            path = args[0];
+        }
+        if (args.length > 1) {
+            filterSize = Integer.parseInt(args[1]);
+        }
+        Path p = Paths.get(path);
         ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
         ExecutorService pool = Executors.newFixedThreadPool(10);
         try {
-            Files.walkFileTree(p, new MultiThreadFileVisitor(map, pool));
+            Files.walkFileTree(p, new MultiThreadFileVisitor(map, pool, filterSize));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -21,9 +21,11 @@ public class MultiThreadFileVisitor implements FileVisitor<Path> {
     private Map<String, String> fingerPrints;
     private ExecutorService pool;
     Logger logger = LoggerFactory.getLogger(MultiThreadFileVisitor.class);
-    public MultiThreadFileVisitor(Map<String, String> map, ExecutorService pool) {
+    private int filterSize;
+    public MultiThreadFileVisitor(Map<String, String> map, ExecutorService pool, int filterSize) {
         fingerPrints = map;
         this.pool = pool;
+        this.filterSize = filterSize;
     }
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -32,7 +34,7 @@ public class MultiThreadFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        pool.execute(new FileHandler(file, attrs, fingerPrints));
+        pool.execute(new FileHandler(file, attrs, fingerPrints, filterSize));
         return FileVisitResult.CONTINUE;
     }
 

@@ -19,16 +19,18 @@ public class FileHandler implements Runnable {
     private BasicFileAttributes attrs;
     private Map fingerPrints;
     private Logger logger = LoggerFactory.getLogger(FileHandler.class);
+    private int filterSize;
 
-    public FileHandler(Path dir, BasicFileAttributes attrs, Map fingers) {
+    public FileHandler(Path dir, BasicFileAttributes attrs, Map fingers, int filterSize) {
         this.file = dir;
         this.attrs = attrs;
         this.fingerPrints = fingers;
+        this.filterSize = filterSize;
     }
 
     @Override
     public void run() {
-        if (attrs.size() > 0) {
+        if (attrs.size() > filterSize * 1024 * 1024) {
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file.toFile());
@@ -47,8 +49,6 @@ public class FileHandler implements Runnable {
             } else {
                 fingerPrints.put(md5, file.toString());
             }
-//            System.out.println(fingerPrints.size());
-//            System.out.println("finish: " + file.toString());
         }
     }
 }
